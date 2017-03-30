@@ -1,6 +1,10 @@
-st=type('ddfd')
+s=[]
 
-print st.__class__
+for i in range(100):
+	s.append(i)
+
+
+print s
 
 
 
