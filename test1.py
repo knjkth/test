@@ -6,10 +6,12 @@ t=[87,77,92,68,80,78,84,77,81,80,80,77,92,86,76,80,
 s=sorted(t)
 
 print s
-
-
-
 sum=0
+dt={}
+
+
+
+
 
 for i in range(len(s)):
 	sum+=s[i]
