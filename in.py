@@ -1,12 +1,12 @@
+import logging
 
-list1=[1,2]
-dict1={}.fromkeys(('x','y'),2)
+sum=8318
 
-print dict1.setdefault('z',0)
+exprimentNumber=196
 
-dict2={str(list1):4}
+possible=1.0/6
 
-print dict2
+print 1.0/exprimentNumber
+print 1.0/possible
 
-
-print dict1
+print sum*(1.0/exprimentNumber)*(1/possible)-exprimentNumber
