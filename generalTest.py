@@ -1,6 +1,8 @@
 #coding=utf-8
-
+from __future__ import division
 import logging
+
+
 
 # [value1,value2]value1表示X出现的概率，value2表示X实际出现的次数
 
@@ -16,11 +18,11 @@ def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认
 			sum+=listToCompu[i][1]      #对所有实验次数求和，校验总和是否正确
 
 		if sum!=exprimentNumber:
-			logging.error('卡方检验实验次数校验失败')
+			logging.error('卡方计算实验次数校验失败')
 			return -1
 		else:
 			sum=0
-			logging.info('卡方检测开始.....')
+			logging.info('卡方计算开始.....')
 
 			if psIsTrue==True:
 				possible=listToCompu[0][0]
@@ -31,10 +33,10 @@ def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认
 
 					kafang = sum*(1.0/exprimentNumber)*(1.0/possible)-exprimentNumber
 					logging.info('kafang value is %f' % kafang)
-					logging.info('卡方检测结束.....')
+					logging.info('卡方计算结束.....')
 					return kafang
 				except ZeroDivisionError:
-					logging.error('发生了除零错误')
+					logging.error('卡方计算发生了除零错误')
 					return -1
 
 				
@@ -45,15 +47,15 @@ def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认
 						logging.info('sum value is %f' % sum) 
 					kafang = ((1.0/exprimentNumber)*sum)-exprimentNumber
 					logging.info('kafang value is %f' % kafang)
-					logging.info('卡方检测结束.....')
+					logging.info('卡方计算结束.....')
 					return kafang
 
 				except ZeroDivisionError:
-					logging.error('发生了除零错误')
+					logging.error('卡方计算发生了除零错误')
 					return -1
 
 	else:
-		logging.error('卡方参数输入错误')
+		logging.error('调用卡方计算参数错误')
 		return -1
 
 
@@ -61,7 +63,7 @@ def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认
 
 
 if __name__ == '__main__':
-	l1=[[1.0/6,20],[1.0/6,30],[1.0/6,12],[1.0/6,68],[1.0/6,27],[1.0/6,39]]
+	l1=[[1/6,20],[1/6,30],[1/6,12],[1/6,68],[1/6,27],[1/6,39]]
 	f=com_kfang(l1,196)
 	print f
 	
