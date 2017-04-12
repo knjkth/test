@@ -5,6 +5,8 @@ import logging
 from random import randrange
 from generalTest import com_kfang
 
+print 'test'
+
 def f_jiecheng(n):
 	if isinstance(n,int):
 		if n>1:
@@ -94,7 +96,7 @@ if __name__ == '__main__':
 		sequtest.append(randrange(1,7))
 
 	d=6  #表示序列总共有多少个不同的数
-	collectnum=2 #表示需要集券的数量
+	collectnum=5 #表示需要集券的数量
 	t=d+collectnum #表示最后一个
 
 
