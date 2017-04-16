@@ -6,20 +6,28 @@ import linecache
 
 
 
+tt=0
 
+def tongji(position,name,linetoread,s,name2):
+	
+	fj=open(name,'r')
 
-def tongji(position,fj,linetoread,s):
+	print '%s starting:%s' % (name2,ctime())
 	total=0
-	fj.seek(0,0)
-	for i in range(position-1):
+	
+	for i in xrange(position-1):
 		fj.next()
 
-	for i in range(linetoread):
+	for i in xrange(linetoread):
 		p=[int(x) for x in fj.next().strip('\n').strip().split(' ')]
-				
-		for i in range(len(p)):
-			if p[i]==s:
-				total+=1
+		total+=p.count(s)
+
+	global tt
+	tt+=total
+	#print 'total is:%d' % total
+	print '%s ending:%s' % (name2,ctime())
+
+	fj.close()
 
 	return total
 	
@@ -27,25 +35,50 @@ def tongji(position,fj,linetoread,s):
 
 def main():
 	totallines=0
-	div=10
-	fj=open('test.txt')
+	div=20
+	filename='number.txt'
+	
+	
+	fj=open(filename,'r')
 
 	for i in fj:
 		totallines+=1
 
-	fj.seek(0,0)
+	fj.close()
+	
 
 	lthread=[]
 	position=[]
+	linetoread=[]
 
-	for i in range(10)
+	for i in xrange(div):
+		position.append(i*(totallines/div))
+
+	for i in xrange(div-1):
+		linetoread.append(totallines/div)
+
+	linetoread.append(totallines-(div-1)*(totallines/div))
+
+	
+
+	for i in range(div):
+		t=threading.Thread(target=tongji,args=(position[i],filename,linetoread[i],5,'p'+str(i)))
+		lthread.append(t)
 
 
-	for i in range(10):
-		threading.Thread(tongji,())
+	for i in lthread:
+		i.start()
+
+	for i in lthread:
+		i.join()
+
+	
 
 
 
+if __name__ == '__main__':
+	main()
+	print 'tt is %d' % tt
 
 
-fj.close()
+#fj.close()
