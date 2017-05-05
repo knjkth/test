@@ -3,9 +3,36 @@ from __future__ import division
 import logging
 
 
+def f_jiecheng(n):
+	if isinstance(n,int):
+		if n>1:
+			return n*f_jiecheng(n-1)
+		else:
+			return 1
+	else:
+		print '阶乘需要整数参数'
+
+def f_pailie(m,n):
+	if isinstance(m,int) and isinstance(n,int):
+		if m>=n:
+			return f_jiecheng(m)/f_jiecheng(m-n)
+		else:
+			print '排列输入参数错误,第一个参数要大于第二个参数'
+	else:
+		print '排列需要整数参数'
+
+def f_zuhe(m,n):
+	if isinstance(m,int) and isinstance(n,int):
+		if m>=n:
+			return f_jiecheng(m)/(f_jiecheng(n)*f_jiecheng(m-n))
+		else:
+			print '组合输入参数错误,第一个参数要大于第二个参数'
+	else:
+		print '组合需要整数参数'
+
 
 # [value1,value2]value1表示X出现的概率，value2表示X实际出现的次数
-
+#listToCompu表示待检测的序列，exprimentNumber表示实验的总次数
 def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认情况下每个X出现的概率相等
 	sum=0
 	kafang=0.0
