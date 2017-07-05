@@ -5,6 +5,17 @@ from random import randrange
 from generalTest import *
 
 
+def s_telin(k,r):
+	if r==k and k>=0:
+ 		return 1
+ 	elif r==0 and k>=1:
+  		return 0
+ 	else:
+  		return r*s_telin(k-1,r)+s_telin(k-1,r-1)
+
+
+
+
 def jiechen(d,r):  #d表示阶乘的起始数，r表示要乘几次，结果=d*(d-1)*(d-2)*..*(d-r+1),当d=r时，表示d的阶乘
 	t=d-r
 	def jiechen2(x):
@@ -18,7 +29,7 @@ def jiechen(d,r):  #d表示阶乘的起始数，r表示要乘几次，结果=d*(
 def com_possible(d,k=5):#n表示总共有多少个概率值，d表示随机数的范围,k表示几元组(也表示总共有多少个概率值)，默认为5
 	possilbe=[]
 	for i in range(1,k+1):
-		possilbe.append(jiechen(d,i)*f_zuhe(k,i)/pow(d,k))
+		possilbe.append(jiechen(d,i)*s_telin(k,i)/pow(d,k))
 	return possilbe
 
 
@@ -33,7 +44,7 @@ def com_differ_number(list5number): #计算一个五元组中有多少个不同
 	return len(lisave)+1   #加1表示算上自己，也就是list5number[0]这个数
 
 
-def com_puke(listtotest,d,n=5):#listtotest 表示待检测的序列，d表示随机数范围，n表示按几元组来检测，默认为5
+def com_puke(listtotest,d,n=3):#listtotest 表示待检测的序列，d表示随机数范围(也是取值范围，如快3，d=6)，n表示按几元组来检测，默认为5
 	logging.basicConfig(format='%(asctime)s %(message)s',filename='test.log',level=logging.DEBUG)
 	logging.info('扑克检验开始.......')
 	length=int(len(listtotest)/n)
@@ -57,10 +68,14 @@ def com_puke(listtotest,d,n=5):#listtotest 表示待检测的序列，d表示随
 
 def main():
 	
-	sequtest=[]
-	for i in range(50000):
-		sequtest.append(randrange(1,7))
-	n,s2=com_puke(sequtest,7)
+	s1=[]
+	fj=open('data2.dat','r')
+	for eachline in fj:
+		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
+		s1.extend(a1)
+	fj.close()
+
+	n,s2=com_puke(s1,6)
 
 	print n,s2
 	print com_kfang(s2,n,False)

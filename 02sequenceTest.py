@@ -40,11 +40,18 @@ def comp_sequence(lisToCheck,allPossbileValue): #lisToCheck表示需要比对的
 if __name__ == '__main__':
 	
 	logging.basicConfig(format='%(asctime)s %(levelname)s : %(message)s ',filename='test.log',level=logging.DEBUG)
-	list1=[]
+	s1=[]
 	list2=[]
-	for i in range(360):
-		list1.append(random.randrange(1,7))
-	logging.info('sequence to be tested is :%s' % str(list1))
+
+	fj=open('data2.dat','r')
+	for eachline in fj:
+		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
+		s1.extend(a1)
+	fj.close()
+
+	
+	
+	logging.info('sequence to be tested is :%s' % str(s1))
 
 	tuple1=((1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), 
 		(2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), 
@@ -53,7 +60,7 @@ if __name__ == '__main__':
 		(5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), 
 		(6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6))
 
-	t=comp_sequence(list1,tuple1)
+	t=comp_sequence(s1,tuple1)
 
 	
 
@@ -62,7 +69,7 @@ if __name__ == '__main__':
 		
 
 
-	f=com_kfang(list2,180)
+	f=com_kfang(list2,len(s1)/2)
 	print f
 
 

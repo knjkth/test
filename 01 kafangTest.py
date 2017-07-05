@@ -37,16 +37,18 @@ def com_X(sequence1,sequence2,possible,psIsTrue=True): #若psIsTrue 是真，则
 
 
 if __name__=='__main__':
-	li=[]
-	possible=[1/3,1/3,1/5,1/7,1/8,1/9]
-	total=200000
-	for i in range(total):
-		li.append(randrange(1,7))
-
 	
+	s1=[]
+	fj=open('number.txt','r')
+	for eachline in fj:
+		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
+		s1.extend(a1)
+	fj.close()
 
-	t=com_X(li,[1,2,3,4,5,6],1/6)
-	print com_kfang(t,total)
+	print len(s1)
+
+	t=com_X(s1,[1,2,3,4,5,6],1/6)
+	print com_kfang(t,len(s1))
 
 
 

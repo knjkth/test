@@ -5,16 +5,20 @@ import random
 from generalTest import com_kfang
 
 
-#startvalue表示起始值，endvalue表示结束值，sequence表示待检测序列,n表示要收集的间隔表格，t表示间隔的长度
-def com_gap(startvalue,endvalue,sequence,n,t):
+#startvalue表示起始值，endvalue表示结束值，zone表示整个区间大小，如快3号码范围1-6，zone=6，sequence表示待检测序列,n表示要收集的间隔表格，t表示间隔的长度
+#startvalue<=x<endvalue,快3，中下为1<=x<4,中上为3<=x<7
+def com_gap(startvalue,endvalue,zone,sequence,n,t):
 	logging.basicConfig(format='%(asctime)s %(message)s',filename='test.log',level=logging.DEBUG)
 	logging.info('间隔检测开始.....')
 	possible=[]
-	
-	for i in range(t):
-		possible.append((endvalue-startvalue)*(1-endvalue+startvalue)**i)
+	p=(endvalue-startvalue)/zone
 
-	possible.append((1-endvalue+startvalue)**t)
+	for i in range(t):
+		#possible.append((endvalue-startvalue)*(1-endvalue+startvalue)**i)
+		possible.append(p*(1-p)**i)
+
+	#possible.append((1-endvalue+startvalue)**t)
+	possible.append((1-p)**t)
 
 	logging.info('possible is %s'% str(possible))
 
@@ -32,7 +36,7 @@ def com_gap(startvalue,endvalue,sequence,n,t):
 	
 
 	for i in range(len(sequence)):
-		if startvalue<=sequence[i]<=endvalue:
+		if startvalue<=sequence[i]<endvalue:
 			if r<t:
 				rnt[r]+=1
 				logging.info('length %d has been found,startindex=%d ,endindex=%d,now sequence is %s' %(r,j,i,rnt))
@@ -62,15 +66,22 @@ def com_gap(startvalue,endvalue,sequence,n,t):
 
 
 def main():
-	lis=[]
-	total=50000
-	exprimentimes=200
+	
+	s1=[]
+	fj=open('data.dat','r')
+	for eachline in fj:
+		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
+		s1.extend(a1)
+	fj.close()
 
-	for i in range(total):
-		lis.append(random.random())
 
 	
-	lis2=com_gap(0,0.3,lis,exprimentimes,8)
+	exprimentimes=8000
+
+	
+
+	
+	lis2=com_gap(2,4,6,s1,exprimentimes,8)
 
 	print lis2
 

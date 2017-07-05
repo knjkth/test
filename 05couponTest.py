@@ -32,13 +32,20 @@ def f_zuhe(m,n):
 	else:
 		print '组合需要整数参数'
 
+def s_telin(k,r):
+	if r==k and k>=0:
+ 		return 1
+ 	elif r==0 and k>=1:
+  		return 0
+ 	else:
+  		return r*s_telin(k-1,r)+s_telin(k-1,r-1)
 
 
 def com_coupon(listToTest,rangeNum,rNumber,totalNumber):#listToTest 表示待检测的序列，rangeNum表示序列中不同的元素个数，
 														#rNumber表示集券多少种不同长度的序列,totalNumber表示总共要集券的数量
 	logging.basicConfig(format='%(asctime)s %(message)s',filename='test.log',level=logging.DEBUG)
 	logging.info('集券测试开始.....')
-	logging.info('sequence to be tested is %s' % str(listToTest))
+	#logging.info('sequence to be tested is %s' % str(listToTest))
 	
 	s=0
 	listCouponArray=[]     #标记在一轮集券收集过程中，元素是否出现
@@ -67,19 +74,21 @@ def com_coupon(listToTest,rangeNum,rNumber,totalNumber):#listToTest 表示待检
 					logging.info('the %dth  , collect length is %d , now all data is: %s' % (s,r,str(finallyCouponArray)))
 					
 				else:
-					for i in finallyCouponArray:#找到对应集券的长度
-						if i[0]==r:
-							i[1]+=1    
+					for t in finallyCouponArray:#找到对应集券的长度
+						if t[0]==r:
+							t[1]+=1    
 							break
 					logging.info('the %dth  , collect length is %d , now all data is: %s' % (s,r,str(finallyCouponArray)))
 					
 				
 				r,q=0,0
-				for i in range(len(listCouponArray)):
-					listCouponArray[i]=0
+				for j in range(len(listCouponArray)):
+					listCouponArray[j]=0
 				
 				if s==totalNumber:
+					logging.info('当前索引位置是 %d' % (i))
 					logging.info('集券收集齐全....')
+
 					break
 
 		
@@ -97,26 +106,24 @@ def com_coupon(listToTest,rangeNum,rNumber,totalNumber):#listToTest 表示待检
 if __name__ == '__main__':
 	
 	
-	sequtest=[]
+	
 	possible=[]
 	
-	'''
-	fj=open('number.txt','r')
-	for i in range(50000):
-		n=fj.readline().strip('\n').strip().split(' ')
-		sequtest.extend([int(x) for x in n])
-	'''
-
-	for i in range(50000):
-		sequtest.append(randrange(1,7))
+	
+	s1=[]
+	fj=open('data2.dat','r')
+	for eachline in fj:
+		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
+		s1.extend(a1)
+	fj.close()
 
 	d=6  #表示序列总共有多少个不同的数
-	collectnum=10#表示需要多少种不同长度的集券数量
-	number=500 #表示总共要收集多少个
-	t=d+collectnum #表示最后一个
+	collectnum=20#表示需要多少种不同长度的集券数量
+	number=2000 #表示总共要收集多少个
+	t=d+collectnum-1 #表示最后一个
 
 
-	s=com_coupon(sequtest,d,collectnum,number)
+	s=com_coupon(s1,d,collectnum,number)
 	if s!=-1:
 		
 	
@@ -128,12 +135,14 @@ if __name__ == '__main__':
 		
 		for x in range(r,r+collectnum-1):
 
-			possible.append(f_jiecheng(d)*f_zuhe(x-1,d-1)/pow(d,x))
+			possible.append(f_jiecheng(d)*s_telin(x-1,d-1)/pow(d,x))
 
-		possible.append(1-f_jiecheng(d)*f_zuhe(t-1,d)/pow(d,t-1))	
+
+		possible.append(1-f_jiecheng(d)*s_telin(t-1,d)/pow(d,t-1))	
 
 		print possible
 
+		
 
 		
 		last=[]

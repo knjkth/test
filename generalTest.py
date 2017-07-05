@@ -90,7 +90,25 @@ def com_kfang(listToCompu,exprimentNumber,psIsTrue=True):  #psIsTrue表示默认
 
 
 if __name__ == '__main__':
-	l1=[[1/6,20],[1/6,30],[1/6,12],[1/6,68],[1/6,27],[1/6,39]]
-	f=com_kfang(l1,196)
+	count1=0
+	count2=0
+	count3=0
+	count4=0
+	count5=0
+	count6=0
+	fj=open('data.dat','r')
+	for eachline in fj:
+		count1+=eachline.strip('\n').count('1')
+		count2+=eachline.strip('\n').count('2')
+		count3+=eachline.strip('\n').count('3')
+		count4+=eachline.strip('\n').count('4')
+		count5+=eachline.strip('\n').count('5')
+		count6+=eachline.strip('\n').count('6')
+
+	total=count1+count2+count3+count4+count5+count6
+	l1=[[1/6,count1],[1/6,count2],[1/6,count3],[1/6,count4],[1/6,count5],[1/6,count6]]
+	print l1,total
+	
+	f=com_kfang(l1,total)
 	print f
 	
