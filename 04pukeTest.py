@@ -44,7 +44,7 @@ def com_differ_number(list5number): #计算一个五元组中有多少个不同
 	return len(lisave)+1   #加1表示算上自己，也就是list5number[0]这个数
 
 
-def com_puke(listtotest,d,n=3):#listtotest 表示待检测的序列，d表示随机数范围(也是取值范围，如快3，d=6)，n表示按几元组来检测，默认为5
+def com_puke(listtotest,d,n=5):#listtotest 表示待检测的序列，d表示随机数范围(也是取值范围，如快3，d=6)，n表示按几元组来检测，默认为5
 	logging.basicConfig(format='%(asctime)s %(message)s',filename='test.log',level=logging.DEBUG)
 	logging.info('扑克检验开始.......')
 	length=int(len(listtotest)/n)
@@ -69,13 +69,13 @@ def com_puke(listtotest,d,n=3):#listtotest 表示待检测的序列，d表示随
 def main():
 	
 	s1=[]
-	fj=open('data2.dat','r')
+	fj=open('q2_3.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
 	fj.close()
 
-	n,s2=com_puke(s1,6)
+	n,s2=com_puke(s1,22)
 
 	print n,s2
 	print com_kfang(s2,n,False)

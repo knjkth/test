@@ -1,1 +1,5 @@
-print [0]*5
+import time
+
+
+tt=time.time()
+print time.ctime(tt)

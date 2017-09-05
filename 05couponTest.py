@@ -4,6 +4,7 @@ from __future__ import division
 import logging
 from random import randrange
 from generalTest import com_kfang
+import time
 
 def f_jiecheng(n):
 	if isinstance(n,int):
@@ -107,19 +108,28 @@ if __name__ == '__main__':
 	
 	
 	
-	possible=[]
+	#possible=[]
+
+	possible=[3.292059032949367e-09, 3.4566619845968355e-08, 1.927350924744902e-07,
+			   7.588944266183052e-07,2.3682473817678352e-06,6.233962309566002e-06,
+			   1.4389023714359412e-05,2.989766602011395e-05, 5.698608262563513e-05,
+			   0.00010105294410016535, 0.00016854005990358004, 0.000266666625939972,
+			   0.0004030514796139018,0.0005852627896165278, 0.0008203418877349056,
+			   0.0011143476568626054,0.0014719615060393614,0.0018961826311083207,
+			   0.002388131198489239,0.9906735967503421]
+
 	
 	
 	s1=[]
-	fj=open('data2.dat','r')
+	fj=open('q2_2.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
 	fj.close()
 
-	d=6  #表示序列总共有多少个不同的数
+	d=22  #表示序列总共有多少个不同的数
 	collectnum=20#表示需要多少种不同长度的集券数量
-	number=2000 #表示总共要收集多少个
+	number=1000 #表示总共要收集多少个
 	t=d+collectnum-1 #表示最后一个
 
 
@@ -130,20 +140,18 @@ if __name__ == '__main__':
 		print s
 
 		
-
+		'''
 		r=d
 		
 		for x in range(r,r+collectnum-1):
-
+			tt=time.time()
+			print '%d start, time is:%s' %(x,time.ctime(tt))
 			possible.append(f_jiecheng(d)*s_telin(x-1,d-1)/pow(d,x))
+			print '%d is %s,waste %d' %(x,possible,time.time()-tt)
 
 
 		possible.append(1-f_jiecheng(d)*s_telin(t-1,d)/pow(d,t-1))	
-
-		print possible
-
-		
-
+		'''
 		
 		last=[]
 

@@ -5,6 +5,11 @@ import random
 from generalTest import com_kfang
 
 
+'''
+间隔检测，	
+
+'''
+
 #startvalue表示起始值，endvalue表示结束值，zone表示整个区间大小，如快3号码范围1-6，zone=6，sequence表示待检测序列,n表示要收集的间隔表格，t表示间隔的长度
 #startvalue<=x<endvalue,快3，中下为1<=x<4,中上为3<=x<7
 def com_gap(startvalue,endvalue,zone,sequence,n,t):
@@ -68,7 +73,7 @@ def com_gap(startvalue,endvalue,zone,sequence,n,t):
 def main():
 	
 	s1=[]
-	fj=open('data.dat','r')
+	fj=open('q2_3.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
@@ -76,12 +81,12 @@ def main():
 
 
 	
-	exprimentimes=8000
+	exprimentimes=40000
 
 	
 
 	
-	lis2=com_gap(2,4,6,s1,exprimentimes,8)
+	lis2=com_gap(1,12,22,s1,exprimentimes,8)
 
 	print lis2
 
