@@ -48,17 +48,21 @@ def com_X(sequence1,sequence2,possible,psIsTrue=True): #若psIsTrue 是真，则
 if __name__=='__main__':
 	
 	s1=[]
-	fj=open('q2_3.txt','r')
+	fj=open('aaa.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
 	fj.close()
 
 	print len(s1)
+	t = com_X(s1, [1, 2, 3, 4, 5, 6], 1/6)
+	print com_kfang(t, len(s1))
 
+
+'''
 	t=com_X(s1,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],1/22)
 	print com_kfang(t,len(s1))
-
+'''
 
 
 
