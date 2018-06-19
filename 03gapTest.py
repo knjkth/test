@@ -73,7 +73,7 @@ def com_gap(startvalue,endvalue,zone,sequence,n,t):
 def main():
 	
 	s1=[]
-	fj=open('q2_3.txt','r')
+	fj=open('k3.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
@@ -81,12 +81,12 @@ def main():
 
 
 	
-	exprimentimes=40000
+	exprimentimes=100000
 
 	
 
 	
-	lis2=com_gap(1,12,22,s1,exprimentimes,8)
+	lis2=com_gap(1,3,6,s1,exprimentimes,10)
 
 	print lis2
 

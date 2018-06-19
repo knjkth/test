@@ -1,46 +1,43 @@
-import logging
-import win32com.client
-import time
+#-*- coding:utf-8 -*-
+import wx
 
-'''
-def random_range(min_bound, max_bound):
-    interval_len = max_bound - min_bound + 1
-    qng = win32com.client.Dispatch("QWQNG.QNG")
-    rand32 = qng.RandInt32
-    return min_bound + rand32 % interval_len
+class MainWindow(wx.Frame): 
+  '''定义一个窗口类'''
+  def __init__(self, parent, title): 
+    wx.Frame.__init__(self, parent, title=title, size=(600, 600)) 
+    self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE) 
+   
+    self.setupMenuBar() 
+    self.Show(True) 
+   
+  def setupMenuBar(self): 
+    self.CreateStatusBar() 
+   
+    menubar = wx.MenuBar() 
+    menufile = wx.Menu() 
+   
+    mnuabout = menufile.Append(wx.ID_ABOUT, '&About', 'about this shit') 
+    mnuexit = menufile.Append(wx.ID_EXIT, 'E&xit', 'end program') 
+   
+    menubar.Append(menufile, '&File') 
+   
+    #事件绑定 
+    self.Bind(wx.EVT_MENU, self.onAbout, mnuabout) 
+    self.Bind(wx.EVT_MENU, self.onExit, mnuexit) 
+       
+    self.SetMenuBar(menubar) 
+   
+  def onAbout(self, evt): 
+      '''点击about的事件响应'''
+      dlg = wx.MessageDialog(self, 'This app is a simple text editor', 'About my app', wx.OK) 
+      dlg.ShowModal() 
+      dlg.Destroy() 
+   
+  def onExit(self, evt): 
+      '''点击退出'''
+      self.Close(True) 
 
-k=1
 
-logging.basicConfig(format='%(asctime)s %(message)s',filename='aaalog.txt',level=logging.INFO)
-fj=open('aaa.txt','w+')
-
-s1=time.time()
-
-while time.time()-s1<3600:
-    if k%3:
-        randnumber=random_range(1,6)
-        fj.write(str(randnumber)+' ')
-        logging.info('%d has produce' %randnumber)
-        k+=1
-    else:
-        randnumber = random_range(1, 6)
-
-        fj.write(str(randnumber)+'\n')
-        logging.info('%d has produce' %randnumber)
-        k=1
-
-fj.close()
-'''
-class randomEvent():
-    def __init__(self,name):
-        self.name=name
-    def generNumber(self,min_bound=1,max_bound=6):
-        interval_len = max_bound - min_bound + 1
-        qng = win32com.client.Dispatch(self.name)
-        rand32 = qng.RandInt32
-        return min_bound + rand32 % interval_len
-
-re=randomEvent('QWQNG.QNG')
-for i in range(3):
-    rng=re.generNumber(10,20)
-    print rng
+app = wx.App(False) 
+frame = MainWindow(None, 'Small Editor') 
+app.MainLoop() #循环监听事件

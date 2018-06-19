@@ -69,13 +69,13 @@ def com_puke(listtotest,d,n=5):#listtotest 表示待检测的序列，d表示随
 def main():
 	
 	s1=[]
-	fj=open('q2_3.txt','r')
+	fj=open('k3.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
 	fj.close()
 
-	n,s2=com_puke(s1,22)
+	n,s2=com_puke(s1,6,3)
 
 	print n,s2
 	print com_kfang(s2,n,False)

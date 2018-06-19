@@ -1,10 +1,73 @@
-2 4
-5 6
-3 4 7
-3 4 7
-1 3 5
-2 3 4
-2 6 4
-1 2 3
-2 2 2
-3 3 3
+import DataDrivenParser
+import TestLibrary
+import TestLog
+import xlrd
+
+testData = DataDrivenParser.parse('testdata.xlsx')
+
+logLevel = testData.getSetting('Log Level')
+TestLog.initialize('testlog.log',logLevel)
+logger = TestLog.getLogger('Driver')
+
+logger.info('Test execution started ')
+
+executed = 0
+passed = 0
+
+for tc in testData.getTestCases():
+	executed += 1
+	name = tc.getName()
+	doc = tc.getDoc()
+	logger.info('Started test case %s (%s )'% (name , doc))
+	try :
+		(status , message ) = TestLibrary.testFunction(tc)
+	exceptException,error:
+		status = False
+		message = str(error)
+
+	if status is True :
+		logger.passed('Test case %s passed ' % name)
+		passed += 1
+	else :
+		logger.failed('Test case %s failed : %s '% (name , message))
+		logger.info('%d testcases executed , %d passed , %d failed ' % \
+		(executed , passed , executed−passed)
+
+
+
+import TestLog
+import Calculator # The system under t e s t
+# Get own l o g g e r f o r the l i b r a r y
+logger = TestLog.getLogger( ’ Library ’ )
+def testFunction(tc):
+
+	number1 = int(tc.getData('Number 1'))
+	operator = tc.getData('Operator')
+	number2 = int(tc.getData('Number 2'))
+	expected = int(tc.getData('Expected'))
+
+	logger.debug('Num 1 : %d , Operator : %s , Num 2 : %d,Expected : %d ’ \
+			% ( number1 , operator , number2 , expected))
+
+Calculator.input ( number1 )
+	if operator == ’+’ :
+		Calculator.add ( number2 )
+	if operator == ’−’ :
+Calculator.subtract ( number2 )
+i f ope r a t o r == ’  ’ :
+Ca l cul a t o r . mul t iply ( number2 )
+i f ope r a t o r == ’ / ’ :
+Ca l cul a t o r . di v ide ( number2 )
+r e s u l t = Ca l cul a t o r . g e tRe sul t ( )
+# Check t e s t r e s u l t
+i f r e s u l t == expec ted :
+s t a t u s = True
+message = ’ Test pas sed . Re sul t : %d ’ % ( r e s u l t )
+l o g . i n f o (message )
+el se :
+s t a t u s = Fal s e
+message = ’ Expected : %d , but got : %d ’ % ( expected , r e s u l t )
+l o g . f a i l u r e (message )
+return s tatus , message
+
+

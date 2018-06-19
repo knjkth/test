@@ -48,7 +48,7 @@ def com_X(sequence1,sequence2,possible,psIsTrue=True): #若psIsTrue 是真，则
 if __name__=='__main__':
 	
 	s1=[]
-	fj=open('aaa.txt','r')
+	fj=open('k3.txt','r')
 	for eachline in fj:
 		a1= [int(x) for x in eachline.strip('\n').strip(' ').split(' ')]
 		s1.extend(a1)
